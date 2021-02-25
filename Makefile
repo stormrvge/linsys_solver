@@ -1,4 +1,4 @@
-CFLAGS=--std=c18 -Wall
+CFLAGS=--std=c18
 CC=gcc
 
 all: linsys-solver

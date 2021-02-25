@@ -1,4 +1,5 @@
 ﻿#include <stdio.h>
+#include <stdlib.h>
 #include "file_handler.h"
 #include "matrix.h"
 #include "calculation.h"
