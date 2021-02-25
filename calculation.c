@@ -54,17 +54,24 @@ struct answer solve(const struct matrix matrix)
 	struct answer ans = { .size = matrix.rows, .x = 0};
 	ans.x = malloc(sizeof(double) * matrix.rows);
 
+	// starts from last diagonal element of matrix
 	for (int i = matrix.rows - 1; i >= 0; i--)
 	{
-		double sum = matrix.data[i][matrix.cols - 1];
-		for (int j = i + 1; j < matrix.cols - 1; j++)
+		double num = (matrix.data[i][matrix.cols - 1]);		// num is right side of system equations
+		for (size_t j = matrix.cols - 2; j > i; j--)		// starts from last number from the left side
 		{
-			sum -= matrix.data[i][j] * ans.x[j];
+			num += -(matrix.data[i][j]);		// then we move the left side known constants to the right side of sys. eq.
 		}
 
-		ans.x[i] = sum / matrix.data[i][i];
-	}
+		double x = num / matrix.data[i][i];		// finding x by dividing the right side by unknown to us x
+		ans.x[i] = x * matrix.coef;
 
+		for (size_t k = 0; k < matrix.rows; k++)
+		{
+			matrix.data[k][i] *= x;				// then we multiply every element of column on x
+		}
+	}
+	
 	return ans;
 }
 
