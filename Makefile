@@ -12,14 +12,12 @@ file_handler.o: file_handler.c
 matrix.o: matrix.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
-utils.o: utils.c
-	$(CC) -c $(CFLAGS) $< -o $@
 
 main.o: main.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
-linsys-solver: main.o calculation.o matrix.o file_handler.o utils.o
+linsys-solver: main.o calculation.o matrix.o file_handler.o
 	$(CC) -o linsys-solver $^
 
 clean:
-	rm -f main.o calculation.o matrix.o file_handler.o utils.o linsys-solver
+	rm -f main.o calculation.o matrix.o file_handler.o linsys-solver

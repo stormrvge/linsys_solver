@@ -1,6 +1,5 @@
 #include "file_handler.h"
 #include "matrix.h"
-#include "utils.h"
 #include <malloc.h>
 
 #define READ_MODE "rb"
