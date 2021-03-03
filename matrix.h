@@ -12,7 +12,7 @@ struct matrix
 	double** data;
 };
 
-struct matrix matrix_create(size_t rows, size_t cols, int64_t coef);
+struct matrix matrix_create(size_t rows, size_t cols);
 struct matrix read_matrix_file(FILE* file);
 struct matrix read_matrix_input();
 
@@ -21,6 +21,6 @@ struct matrix matrix_copy(const struct matrix);
 void matrix_free(struct matrix* matrix);
 
 size_t cols_in_matrix(const char* row, size_t rows);
-size_t rows_in_matrix(const char* buffer, size_t buffer_pointer);
+size_t rows_in_matrix(const char* buffer);
 
 #endif // !MATH_MATRIX_H

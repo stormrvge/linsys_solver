@@ -14,10 +14,11 @@ struct matrix row_echelon_form(struct matrix matrix)
 		return empty_matrix;
 	}
 
+	int swap_amount = 0;
 	// to row echelon form
 	for (size_t i = 0; i + 1 < matrix.rows; i++)
 	{
-		swap_max_row(matrix, i);
+		if (swap_max_row(matrix, i)) swap_amount++;
 		for (size_t j = i + 1; j < matrix.rows; j++)
 		{
 			const double multy = matrix.data[i][i] / matrix.data[j][i];
@@ -27,14 +28,18 @@ struct matrix row_echelon_form(struct matrix matrix)
 				matrix.data[j][k] = matrix.data[j][k] * multy - matrix.data[i][k];
 			}
 		}
+
+		printf("\n\nIteration: %zu\n", i + 1);
+		matrix_print(matrix);
 	}
 
 
 	// check determinant
 	double determinant = 1;
+	printf("\n\nSwap amount: %d\n\n", swap_amount);
 	for (size_t i = 0; i < matrix.rows; i++)
 	{
-		determinant *= matrix.data[i][i];
+		determinant *= pow(-1, swap_amount) * matrix.data[i][i];
 	}
 
 	printf("\nDeterminant: %f\n", determinant);
@@ -51,7 +56,7 @@ struct matrix row_echelon_form(struct matrix matrix)
 
 struct answer solve(const struct matrix matrix)
 {
-	struct answer ans = { .size = matrix.rows, .x = 0};
+	struct answer ans = { .size = matrix.rows, .x = 0 };
 	ans.x = malloc(sizeof(double) * matrix.rows);
 
 	// starts from last diagonal element of matrix
@@ -71,7 +76,7 @@ struct answer solve(const struct matrix matrix)
 			matrix.data[k][i] *= x;				// then we multiply every element of column on x
 		}
 	}
-	
+
 	return ans;
 }
 
@@ -112,7 +117,7 @@ void epsilon_print(struct answer eps)
 	}
 }
 
-void swap_max_row(struct matrix matrix, size_t step)
+bool swap_max_row(struct matrix matrix, size_t step)
 {
 	size_t rows = matrix.rows;
 	size_t cols = matrix.cols;
@@ -127,7 +132,7 @@ void swap_max_row(struct matrix matrix, size_t step)
 	{
 		if (abs(matrix.data[i][step]) > max_size)
 		{
-			max_size = matrix.data[i][step];
+			max_size = abs(matrix.data[i][step]);
 			max_row = i;
 		}
 		if (max_size == 0) start_col++;
@@ -139,4 +144,7 @@ void swap_max_row(struct matrix matrix, size_t step)
 		matrix.data[step][i] = matrix.data[max_row][i];
 		matrix.data[max_row][i] = temp_data;
 	}
+
+	if (step != max_row) return true;
+	else return false;
 }

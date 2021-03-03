@@ -2,6 +2,7 @@
 #define MATH_CALCULATION_H
 
 #include "matrix.h"
+#include <stdbool.h>
 
 struct answer
 {
@@ -15,6 +16,6 @@ struct answer epsilon(const struct matrix, struct answer x);
 void answer_print(struct answer);
 void epsilon_print(struct answer eps);
 
-void swap_max_row(struct matrix matrix, size_t step);
+bool swap_max_row(struct matrix matrix, size_t step);
 
 #endif // !MATH_CALCULATION_H

@@ -81,15 +81,15 @@ struct matrix read_matrix_input()
 {
 	size_t rows;
 	printf("Enter matrix rows amount: ");
-	scanf("%zu", &rows);
+	scanf_s("%zu", &rows);
 
 	size_t cols;
 	printf("Enter matrix columns amount (with vector column free member): ");
-	scanf("%zu", &cols);
+	scanf_s("%zu", &cols);
 
 	int64_t coef;
 	printf("Enter coefficient of matrix: ");
-	scanf("%"SCNd64, &coef);
+	scanf_s("%"SCNd64, &coef);
 
 	printf("Enter matrix: \n");
 
@@ -191,7 +191,7 @@ static void fill_matrix(struct matrix* matrix)
 		for (size_t j = 0; j < matrix->cols; j = j + 1)
 		{
 			double num;
-			if (scanf("%lf", &num) > 0)
+			if (scanf_s("%lf", &num) > 0)
 				matrix->data[i][j] = num;
 		}
 	}

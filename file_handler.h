@@ -5,6 +5,7 @@
 #include <inttypes.h>
 #include <stdio.h>
 
+#define MAX_MATRIX_SIZE 20
 
 bool open_file(FILE** file, char* path);
 bool close_file(FILE* file);
